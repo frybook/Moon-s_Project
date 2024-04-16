@@ -1,0 +1,20 @@
+서울교통공사_서울도시철도 역사별 세부 정보
+https://www.data.go.kr/data/15107020/fileData.do
+
+서울시 지하철 혼잡도 통계
+https://data.seoul.go.kr/dataList/262/S/2/datasetView.do#
+
+서울시 지하철수송 통계
+https://data.seoul.go.kr/dataList/273/S/2/datasetView.do#
+
+서울시 지하철 운행현황 통계
+https://data.seoul.go.kr/dataList/247/S/2/datasetView.do#
+
+서울시 대중교통 요금 통계
+https://data.seoul.go.kr/dataList/274/S/2/datasetView.do#
+
+서울특별시_ 행정동 단위 대중교통 출발지 도착지 승객수 정보
+https://www.data.go.kr/data/15099593/fileData.do
+
+서울교통공사_운임표
+https://www.data.go.kr/data/15044259/fileData.do
