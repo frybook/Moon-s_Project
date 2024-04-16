@@ -1,0 +1,14 @@
+행 : 가로, Row
+열 : 세로,Columns,col
+loc[row, column] : label 이용 
+axis=0 : 행을
+axis=1 : 열을
+열과 행을 나타낼땐 [행:열] 순서로 표현해야한다.
+loc : 칼럼명을 직접 적거나 특정 조건식을 써줌으로써 사람이 읽기 좋은 방법
+iloc : 컴퓨터가 읽기 좋은 방법으로 (숫자)데이터가 있는 위치(순서)접근
+data1['총합'] = data1.loc[:,"수학":"체육"].sum(axis= 1)
+data1['평균'] = data1.loc[:,"수학":"체육"].min(axis= 1)
+data1.loc['총합'] = data1.loc["서준":"수성",:].sum(axis= 0)
+data1.loc['평균'] = data1.loc["서준":"수성",:].min(axis= 0)
+
+().fillna() : 결측치 채우기
