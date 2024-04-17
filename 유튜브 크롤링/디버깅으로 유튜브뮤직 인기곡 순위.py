@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
@@ -61,7 +60,7 @@ df = pd.DataFrame(search,columns=["곡","가수","링크","앨범"])
 today = datetime.today().date()
 df.to_csv("인기TOP100" + "_" + f'{today}' + ".csv")
 df.to_excel("인기TOP100" + "_" + f'{today}'  + ".xlsx")
-=======
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
@@ -160,4 +159,4 @@ with open(file_name, 'w', encoding= "utf-8")as f:
     
 print("생성자 파일: ",file_name)
 
->>>>>>> main
+
