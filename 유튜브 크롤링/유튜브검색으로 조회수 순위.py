@@ -193,7 +193,7 @@ for title,url,view,upload in zip(titles,urls,views,uploads):
 # 추출 결과를 판다스 데이터프레임 형식으로 변환
 df = pd.DataFrame(search,columns=["제목","링크","조회수","업로드"])
 
-df.to_csv(info + ".csv")
+df.to_csv(info + ".csv", encoding ='cp949')
 df.to_excel(info + ".xlsx")
 
 #,encoding="CP949"

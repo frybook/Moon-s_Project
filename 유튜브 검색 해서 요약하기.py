@@ -52,7 +52,7 @@ for tag in title:
     url = tag['href']
     titles.append(name)
     urls.append("https://www.youtube.com"+ url)
-#%%
+#%% 
 # 반복문으로 url에 들어가서 summary요약을 저장
 relist = []
 for i in urls:
@@ -60,6 +60,10 @@ for i in urls:
     time.sleep(4)
     summary = driver.find_element(By.ID, "yt_ai_summary_header_summary").click()
     time.sleep(4)
+#%%
+# 새탭으로 이동
+
+
 
 
 
@@ -72,9 +76,9 @@ for i in urls:
 (html로 만들어서 가져온뒤에)'''
 
 
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[1]/font
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[1]/font/font
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[2]/font
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[2]/font/font
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[3]/font
-//*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[3]/font/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[1]/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[1]/font/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[2]/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[2]/font/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[3]/font
+# //*[@id="__next"]/div[1]/div[2]/main/div[2]/div[1]/div/div/div/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/ul/li[3]/font/font

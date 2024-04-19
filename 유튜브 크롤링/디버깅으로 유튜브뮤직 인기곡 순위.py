@@ -127,7 +127,7 @@ df_rank = pd.DataFrame({'순위': range(1, len(df.index) + 1)})
 df = pd.concat([df_rank,df], axis=1)
 
 today = datetime.today().date()
-df.to_csv("인기TOP100" + "_" + f'{today}' + ".csv")
+df.to_csv("인기TOP100" + "_" + f'{today}' + ".csv", encoding ='cp949')
 df.to_excel("인기TOP100" + "_" + f'{today}'  + ".xlsx")
 
 #%%
