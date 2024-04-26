@@ -1,0 +1,9 @@
+C:\Windows\Fonts 글꼴 위치
+
+font_list = [font.name for font in fm.fontManager.ttflist]
+font_list
+plt.rcParams['font.family'] = 'NanumGothic'
+리스트로 확인해서 사용하는 방법 
+sns.set(font='NanumGothic',font_scale=1.2)
+plt.show
+이런식으로 seaborn는 set에서 설정해줘야 사용됌

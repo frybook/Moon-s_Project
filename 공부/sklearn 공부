@@ -1,0 +1,48 @@
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
+
+preprocessing.StandardScaler() 평균을 제거하고 단위 분산에 맞게 조정하여 기능 표준화에 사용되는 클래스를 생성
+
+.fit(X) - X의 데이터를 기반으로 표준화에 필요한 평균 및 표준 편차를 계산 
+기본적으로 데이터에서 크기조정에 필요한 매개변수를 학습
+
+.transform(X) 평균과 표준편차를 사용하여 X의 데이터를 변환 평균을빼고 표준편차로 나누는 X의 각 특성에 표준화 공식
+독립 변수 = 원인이 되는 열
+종속 변수 - 결과가 되는 열
+test_size=0.3 = 데이터의 30%가 테스트용으로 70% 학습용으로 사용되고
+학습용 데이터가 많을수록 더 복잡한 모델 성능이 향상될수 있음
+테스트용 데이터가 모델 성능을 정확하게 평가 할 수 있는 충분한 데이터가 확보 됌
+
+random_state: 특정 값을 설정하면 코드가 실행 될때 마다 데이터가 일관된 방식으로 분할됌
+지정하지 않으면 분할이 무작위로 이루어지며 코드가 실행될때 마다 달라질 수 있다.
+
+X_train 훈련기능이 포함
+X_test 테스트기능이 포함
+y_train 훈련 목표 변수 포함
+y_test 테스트 대상 변수 포함
+
+knn.fit(X_train, y_train)
+fit 입력 데이터와 해당 대상라벨에 대한 모델을 훈련
+
+knn.predict(X_test)  훈련된 모델을 기반으로 새로운 데이터를 예측하는데 사용
+
+nn_matrix = metrics.confusion_matrix(y_test, y_hat) 
+confusion_matrix() 분류 모델의 성능을 설명하는 테이블인 혼동행렬을 계산
+y_test 테스트용을 쓴 것은 나중에 학습용과 비교해서 얼마나 맞는지 확인해보고자 
+[[TM,FP],[FN,TP]]
+승객중에 미생존자를 정확히 예측한 TN    0은 False 1은 True     0   1
+미생존자를 생존자로 잘못 분류한 FP                         0 죽음 
+생존자를 미생존자로 잘못 분류한 FN                         1     생존
+생존자를 정확하게 예측한 TP
+
+
+knn_report = metrics.classification_report(y_test, y_hat) 
+classification_report 주요 분류 지표가 포함된 텍스트 보고서
+정밀도(Precision): 전체 긍정적 예측 수에 대한 참 긍정 예측의 비율입니다. 긍정적인 예측의 정확성을 측정합니다.
+재현율(민감도)(Recall (Sensitivity)): 전체 실제 긍정 수에 대한 참 긍정 예측의 비율입니다. 이는 긍정적인 인스턴스를 올바르게 식별하는 모델의 능력을 측정합니다.
+F1-점수(F1-score): 정밀도와 재현율의 조화 평균입니다. 정밀도와 재현율 간의 균형을 제공합니다.
+지원(Support): 테스트 데이터세트에서 해당 클래스가 실제로 발생한 횟수입니다.
+0 = 미생존자 정확도는 0.84
+1 = 생존자   정확도는 0.72
+
+
