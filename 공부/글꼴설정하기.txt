@@ -1,9 +1,20 @@
 C:\Windows\Fonts 글꼴 위치
-
+import matplotlib.font_manager as fm
 font_list = [font.name for font in fm.fontManager.ttflist]
 font_list
 plt.rcParams['font.family'] = 'NanumGothic'
 리스트로 확인해서 사용하는 방법 
+plt.rcParams['axes.unicode_minus'] =False
 sns.set(font='NanumGothic',font_scale=1.2)
 plt.show
 이런식으로 seaborn는 set에서 설정해줘야 사용됌
+
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import matplotlib.font_manager as fm
+mpl.rcParams['font.family'] = 'NanumGothic'
+plt.rcParams['axes.unicode_minus'] = False
+font_files = fm.findSystemFonts(fontpaths=['C:/Users/moon/AppData/Local/Microsoft/Windows/Fonts']) # 파일을 지정해서 설치
+
+for fpath in font_files:
+    fm.fontManager.addfont(fpath)
