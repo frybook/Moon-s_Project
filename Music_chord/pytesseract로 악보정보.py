@@ -7,7 +7,7 @@ import os
 pdf_file = "시든꽃의물을주듯.pdf"
 
 # PDF를 이미지로 변환하여 임시 폴더에 저장
-pages = convert_from_path(pdf_file, 600)  # 300 DPI로 변환
+pages = convert_from_path(pdf_file, 1200)  # 300 DPI로 변환
 
 # 임시 이미지 파일들을 저장할 폴더 생성
 temp_image_dir = 'temp_images'

@@ -9,6 +9,11 @@ def threshold(image):
     return image
 
 
+
+
+
+
+
 # 1. 보표 영역 추출 및 그 외 노이즈 제거
 def playing(image):
     image = threshold(image)  # 이미지 이진화

@@ -12,28 +12,34 @@ print(harmony)
 # pdf 곡 text화
 
 from PyPDF2 import PdfReader
+
 # reader = PdfReader("시든꽃의물을주듯.pdf")
 # reader = PdfReader("예뻤어.pdf")
 # reader = PdfReader("잘지내요.pdf") # 성공
 # reader = PdfReader("휠릴리.pdf")
 # reader = PdfReader("그때.pdf")
 # reader = PdfReader("먹구름.pdf")
-reader = PdfReader("잊혀지다.pdf")
-pages = reader.pages
-text = ""
-for page in pages:
-    sub = page.extract_text()
-    text += sub
+
+def text_setting():
+    title = input("곡 제목을 말해주세요")
+    reader = PdfReader(f"{title}.pdf")
+    pages = reader.pages
+    text = ""
+    for page in pages:
+        sub = page.extract_text()
+        text += sub
+    lines = text.split('\n')
+    return lines
 
 
 #%%
 # 가사와 코드를 마디 기준으로 분리화
 import re
 
-korean_pattern = re.compile(r'[\uac00-\ud7af]+') # 한국어 가사(영어가사 나올경우 안나옴 해결해야됌) 
-korean_text = []
+# korean_pattern = re.compile(r'[\uac00-\ud7af]+') # 한국어 가사(영어가사 나올경우 안나옴 해결해야됌) 
+# korean_text = []
 # Split the text into lines
-lines = text.split('\n')
+# lines = text.split('\n')
 cleaned_lines = []
 exclude = input("제외할 문장을 말해주세요 : ")
 for line in lines:
@@ -47,12 +53,12 @@ for line in lines:
 
 
 # Process each line
-for line in lines:
+# for line in lines:
     
-    # Find all Korean characters
-    korean_matches = korean_pattern.findall(line)
-    if korean_matches:
-        korean_text.append(' '.join(korean_matches))
+#     # Find all Korean characters
+#     korean_matches = korean_pattern.findall(line)
+#     if korean_matches:
+#         korean_text.append(' '.join(korean_matches))
     
     # Find all codes
 def Find_chords(text):   
