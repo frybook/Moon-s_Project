@@ -1,0 +1,13 @@
+KEY,Ⅰ,ⅱ,ⅲ,Ⅳ,Ⅴ,ⅵ,ⅶ
+C_Key,C,D,E,F,G,A,B
+F_Key,F,G,A,Bb,C,D,E
+Bb_Key,Bb,C,D,Eb,F,G,A
+Eb_Key,Eb,F,G,Ab,Bb,C,D
+Ab_Key,Ab,Bb,C,Db,Eb,F,G
+Dd_Key,Db,Eb,F,Db,Ab,Bb,C
+Gb_Key,Gb,Ab,Bb,B,Db,Eb,F
+B_Key,B,C#,D#,E,F#,G#,A#
+E_Key,E,F#,G#,A,B,C#,D#
+A_Key,A,B,C#,D,E,F#,G#
+D_Key,D,E,F#,G,A,B,C#
+G_Key,G,A,B,C,D,E,F#

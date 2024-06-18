@@ -29,6 +29,7 @@ def text_chords(lines):
 #%%
 def Find_chords(cleaned_lines):   
     chords = []
+    formatted_chords = []
     chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|11)?|M(?:6|7)?|dim7?|7(?:sus4)?|sus4|add9|6|9|aug(?:7)?|mM7)?(?:\([#b]?(?:[0-9]|1[0-3])\))?(?:/[A-G](?:#|b)?)?')
     for line in cleaned_lines:
         line1 = line.replace('˙', '').replace('œ', '').replace('N.C','').replace('D.S','').replace('Coda','').replace('.','').replace('‰','')        
@@ -36,14 +37,13 @@ def Find_chords(cleaned_lines):
         if chord_matches:
             chords.append(' '.join(chord_matches))
     
-    return chords
+    for chord_pair in chords:
+        formatted_chords.append(', '.join([f'"{chord}"' for chord in chord_pair.split()]))
+    chords2 = []
+    for chord_string in formatted_chords:
+        pairs = chord_string.split(', ')
+        chords2.append([pair.strip('"') for pair in pairs])
+    
+    return chords2
 
-#%%
-# if __name__ == "__main__":
-#     lines = text_setting()
-#     cleaned_lines = text_chords(lines)
-#     chords = Find_chords(cleaned_lines)
-#     print("추출된 코드(악보 기호):")
-#     for chord in chords:
-#         print(chord)
 
