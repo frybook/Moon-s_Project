@@ -1,6 +1,6 @@
 import pandas as pd
 
-KEY = ['C_Key','F_Key','Bb_Key','Eb_Key','Ab_Key','Db_Key','Gb_Key','B_Key','E_Key','A_Key','D_Key','G_Key']
+KEY = ['C_Key','F_Key','Bb_Key','Eb_Key','Ab_Key','Dd_Key','Gb_Key','B_Key','E_Key','A_Key','D_Key','G_Key']
 Chrods_name = {"Ⅰ" : ["C","F",  "Bb", "Eb", "Ab", "Db", "Gb","B", "E", "A", "D", "G"],
                "ⅱ" : ["D","G",  "C",  "F",  "Bb", "Eb", "Ab","C#","F#","B", "E", "A"],
                "ⅲ" : ["E","A",  "D",  "G",  "C",  "F",  "Bb","D#","G#","C#","F#","B"],
@@ -24,21 +24,13 @@ Chrods_name = {"ⅰ" : ["A","D",  "G",  "C",   "F",  "Bb", "Eb", "G#", "C#", "F#
                "Ⅲ" : ["C","F",  "Bb", "Eb",  "Ab", "Db", "Gb", "B",  "E",  "A",  "D",  "G"],
                "ⅳ" : ["D","G",  "C",  "F",   "Bb", "Eb", "Ab", "C#", "F#", "B",  "E",  "A"],
                "Ⅴ" : ["E","A",  "D",  "G",   "C",  "F",  "Bb", "D#", "G#", "C#" ,"F#", "B"],
-               "Ⅵ" : ["F","Bb", "Eb", "Ab",  "Db", "Gb", "B",  "E",  "A",  "D",  "G",  "C"],
+               "Ⅵ" : ["F","Bb", "Eb", "Ab",  "Db", "Gb", "C",  "E",  "A",  "D",  "G",  "C"],
                "Ⅶ" : ["G","C",  "F",  "Bb",  "Eb", "Ab", "Db", "F#", "B",  "E",  "A",  "D"]}
 Frame2 = pd.DataFrame(Chrods_name,index = KEY)
 
 Frame2.to_csv("minor_scale.csv", index_label='KEY')
 minor_scale = pd.read_csv("minor_scale.csv", index_col='KEY')
 
-#%%
-# 플랫,샵으로 Key 찾기
-KEY = ['C_Key','F_Key','Bb_Key','Eb_Key','Ab_Key','Db_Key','Gb_Key','B_Key','E_Key','A_Key','D_Key','G_Key']
-signature = ['&c','&b','&bb','&bbb','&bbbb','&bbbbb','&bbbbbb','&#####','&####','&###','&##','&#']
-value_name = 'Key_signature'
-Key_name = pd.DataFrame(index=KEY, columns=[value_name], data=signature)
-Key_name.to_csv("Key_signature.csv", index_label='KEY')
-Key_name = pd.read_csv("Key_signature.csv", index_col='KEY')
 
 
 #%%
@@ -53,7 +45,7 @@ def extract_base_note(note):
     if len(base_note) > 1 and base_note[1] in ['b', '#']:
         return base_note[:2]
     return base_note[0]
-#%%
+
 # 코드 타입을 추출하는 함수
 def extract_chord_type(note):
     Characteristics_of_chord = {'m', 'M7', 'm7', '7', "sus4", "7(b9)", "m7(b5)", "dim", "7(#9)"}
@@ -68,54 +60,49 @@ def extract_chord_type(note):
             else:
                 return note[1:]    
     return note
-#%% # key에 따라 로마숫자로 변형
-def process_key(key, chords, Major_scale):
-    # key_formatted = f"{key.strip()}_Key"
-    roman_chords = []
-    for chord_pair in chords:
-        romanized_chord_pair = []
-
-        for note in chord_pair:
-            base_note = extract_base_note(note)
-            chord_type = extract_chord_type(note)
-            found = False
-
-            for col_name in Major_scale.columns:
-                if Major_scale.loc[key, col_name] == base_note:
-                    roman_numeral = col_name
-                    inversion_info = note.split('/')[1] if '/' in note else ''
-                    chord_notation = f"{roman_numeral}{chord_type}" if base_note != chord_type else roman_numeral
-                    if inversion_info:
-                        romanized_chord_pair.append(f"{chord_notation}/{inversion_info}")
-                    else:
-                        romanized_chord_pair.append(chord_notation)
-
-                    found = True
-                    break
-
-            if not found:
-                romanized_chord_pair.append(note)
-
-        roman_chords.append(romanized_chord_pair)
-
-    return roman_chords
-
-#%% 메인코드
-def harmonics(chords,key_name):
+#%%
+def Key_information(modulation):
+    for key in modulation:
+        key = key.strip()
+        key_formatted = f"{key}_Key"  
+    return key_formatted
+    
+#%%
+def harmonics(chords):
     roman_chords_dict = {}
-    secondary_chords = []
     Major_scale = pd.read_csv("Major_scale.csv", index_col='KEY')
-    # modulation = input("Key를 입력해주세요 \n(변조가 있으면 , Key를 입력해주세요) : ").split(",")
-    # modulation = [key.strip() for key in modulation]  
+    modulation = input("Key를 입력해주세요 \n(변조가 있으면 , Key를 입력해주세여) : ").split(",")
+    
+    for key in modulation:
+        key = key.strip()
+        key_formatted = f"{key}_Key"          
+        roman_chords = []
+        for chord_pair in chords:
+            romanized_chord_pair = []
 
-    for key in key_name:        
-        roman_chords = process_key(key, chords, Major_scale)
-        roman_chords_dict[key] = roman_chords
+            for note in chord_pair:
+                base_note = extract_base_note(note)
+                chord_type = extract_chord_type(note)
+                found = False
+
+                for col_name in Major_scale.columns:
+                    if Major_scale.loc[key_formatted, col_name] == base_note:
+                        roman_numeral = col_name
+                        inversion_info = note.split('/')[1] if '/' in note else ''
+                        chord_notation = f"{roman_numeral}{chord_type}" if base_note != chord_type else roman_numeral
+                        if inversion_info:
+                            romanized_chord_pair.append(f"{chord_notation}/{inversion_info}")
+                        else:
+                            romanized_chord_pair.append(chord_notation)
+
+                        found = True
+                        break
+
+                if not found:
+                    romanized_chord_pair.append(note)
+            
+            roman_chords.append(romanized_chord_pair)
         
-    if len(key_name) > 1:    
-        key1 = key_name[1]    
-        chords = roman_chords_dict[key_name[0]]
-        secondary_chords = process_key(key1, chords, Major_scale)     
+        roman_chords_dict[key] = roman_chords
     
-    
-    return roman_chords_dict, secondary_chords
+    return roman_chords_dict
