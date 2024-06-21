@@ -28,7 +28,8 @@ def text_setting():
     extracted_parts = []
     
     for line in lines:
-        matches = re.findall(pattern, line)
+        cleaned_line = line.replace(" ", "")
+        matches = re.findall(pattern,cleaned_line)
         if matches:
             extracted_parts.extend(matches)
     
@@ -43,6 +44,7 @@ def text_setting():
             parts_with_keys.append(key_name)
 
     return lines,parts_with_keys
+
 
 #%%
 
@@ -61,8 +63,8 @@ def text_chords(lines):
 #%%
 def Find_chords(cleaned_lines):   
     chords = []
-    formatted_chords = [] # 9sus4
-    chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|11)?|M(?:6|7)?|dim7?|7(?:sus4)?|sus4|add9|6|9|aug(?:7)?|mM7)?(?:\([#b]?(?:[0-9]|1[0-3])\))?(?:/[A-G](?:#|b)?)?')
+    formatted_chords = [] 
+    chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|11|M7)?|M(?:6|7|9)?|dim7?|7(?:sus4)?|sus4|9sus4|add9|6|9|aug(?:7)?|mM7)?(?:\([#b]?(?:[0-9]|1[0-3])\))?(?:/[A-G](?:#|b)?)?')
     for line in cleaned_lines:
         line1 = line.replace('˙', '').replace('œ', '').replace('N.C','').replace('D.S','').replace('Coda','').replace('.','').replace('‰','')        
         chord_matches = chord_pattern.findall(line1)

@@ -56,7 +56,7 @@ def extract_base_note(note):
 #%%
 # 코드 타입을 추출하는 함수
 def extract_chord_type(note):
-    Characteristics_of_chord = {'m', 'M7', 'm7', '7', "sus4", "7(b9)", "m7(b5)", "dim", "7(#9)"}
+    Characteristics_of_chord = {'m', 'M7', 'm7', '7', "sus4", "7(b9)", "m7(b5)", "dim", "7(#9)","M9","m9"}
     
     if "/" in note:
         note = note.split("/")[0]
@@ -68,6 +68,9 @@ def extract_chord_type(note):
             else:
                 return note[1:]    
     return note
+'''
+코드의 정규식표현으로 다시 만들어보기 Characteristics_of_chord 이부분
+'''
 #%% # key에 따라 로마숫자로 변형
 def process_key(key, chords, Major_scale):
     # key_formatted = f"{key.strip()}_Key"
