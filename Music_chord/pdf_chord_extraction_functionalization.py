@@ -43,7 +43,7 @@ def text_setting():
             key_name = Key_name.loc[Frame_values == part].index[0]
             parts_with_keys.append(key_name)
 
-    return lines,parts_with_keys
+    return lines,parts_with_keys,title
 
 
 #%%
