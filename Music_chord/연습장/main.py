@@ -1,24 +1,24 @@
 from pdf_chord_extraction_functionalization import text_setting, text_chords, Find_chords
 from roman import harmonics,export_to_csv
 from line_filter import line_filter
+import os
 #%% 곡분석
 if __name__ == "__main__":
-    lines,key_name,title = text_setting()
+    folder_path = "C:/Python/Syntex/working/개인/악보" # 악보 폴더 위치
+    title = input("곡 제목을 말해주세요 :")
+    file_path = os.path.join(folder_path, f"{title}.pdf")
+    lines,key_name,title = text_setting(file_path)
     cleaned_lines = text_chords(lines)
     text_separation,change_indices,Order_of_keys = line_filter(cleaned_lines)
     chords = Find_chords(text_separation)      # 코드 악보
     Roman_chords_list,original_chords_list = harmonics(Order_of_keys, chords) # 로마 악보
     export_to_csv(Roman_chords_list,original_chords_list,key_name,title)
     
-    # Transtotext = Transformation_roman[key_name[0]]
-    # music_text = texting(Transtotext)
-    # music_pattern = find_repeated_segments(music_text)
-    # export_to_csv(music_pattern, f'{title}코드.csv')
-    
 #%%
 """
 업데이트 해야 할 내용:    
     제외할 단어 문장을 여러개 지정 가능하게 설정
+    좌표를 지정해서 제목,자곡가,수록같은 불필요한 정보 제외시키기(해결)
     영어 가사의 대한 근본적인 문제를 해결(결국 위에도 같은 내용) 좌표로 제외하는 방법 찾음
     (자동 좌표를 찾는걸 만들어야 해결될듯 하다)
     Major or minor 따라 바뀌는 스케일
@@ -37,6 +37,7 @@ if __name__ == "__main__":
 코드 분리화 수정
 전조되는 부분을 나눠서 키와 코드를 분리
 original과 roman 를 csv로 저장해서 데이터 수집
+구간을 설정해서 제목및 작곡가 같은 텍스트화에 불필요한 정보 제외
 
 """
 

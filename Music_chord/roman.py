@@ -41,19 +41,19 @@ Key_name.to_csv("Key_signature.csv", index_label='KEY')
 Key_name = pd.read_csv("Key_signature.csv", index_col='KEY')
 #%% csv 파일 만들기
 import csv
-def export_to_csv(Roman_chords_list,original_chords_list,key_name,title):    
-    csv_file = f"분석코드/{title}_Rm({key_name}).csv"    
-    with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        for item in Roman_chords_list:
-            writer.writerow([item])
-        
-    csv_file2 = f'분석코드/{title}_Og({key_name}.csv'    
-    with open(csv_file2, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        for item in original_chords_list:
-            writer.writerow([item])    
+def export_to_csv(Roman_chords_list, original_chords_list, key_name, title, export_path):
+    csv_file_rm = f"{export_path}_Rm({key_name}).csv"
+    csv_file_og = f"{export_path}_Og({key_name}).csv"
 
+    with open(csv_file_rm, mode='w', newline='', encoding='utf-8') as file_rm:
+        writer_rm = csv.writer(file_rm)
+        for item in Roman_chords_list:
+            writer_rm.writerow([item])
+
+    with open(csv_file_og, mode='w', newline='', encoding='utf-8') as file_og:
+        writer_og = csv.writer(file_og)
+        for item in original_chords_list:
+            writer_og.writerow([item])
 
 
 
@@ -76,7 +76,7 @@ def extract_base_note(note):
 import re
 def extract_chord_type(note):    
     # chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|11|M7)?|M(?:6|7|9)?|dim7?|7(?:sus4)?|sus4|9sus4|add9|6|9|aug(?:7)?|mM7)?(?:\([#b]?(?:[0-9]|1[0-3])\))?(?:/[A-G](?:#|b)?)?')    
-    chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|11|M7)?|M(?:6|7|9)?|dim7?|7(?:sus4)?|sus4|9sus4|add9|6|9|aug(?:7)?|mM7|(?:add9))?(?:\([#b]?(?:[0-9]|1[0-3]|add9)\))?(?:/[A-G](?:#|b)?)?')
+    chord_pattern = re.compile(r'[A-G](?:#|b)?(?:m(?:6|7|9|11|M7)?|M(?:6|7|9)?|dim7?|7(?:sus4)?|sus4|9sus4|add9|6|9|aug(?:7)?|mM7|(?:add9))?(?:\([#b]?(?:[0-9]|1[0-3]|add9)\))?(?:/[A-G](?:#|b)?)?')
     if "/" in note:
         note = note.split("/")[0]
     

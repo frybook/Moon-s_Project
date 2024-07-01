@@ -1,23 +1,37 @@
 from PyPDF2 import PdfReader
+# 텍스트 읽는 파일
+def process_pdf(file_path):
+    reader = PdfReader(file_path)
+    pages = reader.pages
+    parts = []
+    # 제목부분및 필요없는 부분 구간설정
+    def visitor_body(text, cm, tm, fontDict, fontSize):
+        y = tm[5]
+        if y > 665:
+            parts.append(text)
 
-reader = PdfReader("시든꽃에물을주듯.pdf")
-# page = reader.pages[3]
-pages = reader.pages[0]
-parts = []
+    # 페이지0번째 텍스트 제외구간 설정
+    pages[0].extract_text(visitor_text=visitor_body)
+    text_body_page_0 = "".join(parts)
+    A = text_body_page_0.split('\n')
 
+    # 전체 페이지 정보
+    text = ""
+    for page in pages:
+        text += page.extract_text()
 
-def visitor_body(text, cm, tm, fontDict, fontSize):
-    y = tm[5]
-    if y > 582 and y < 587:
-        parts.append(text)
+    lines = text.split('\n')
 
-A = pages.extract_text()
-pages.extract_text(visitor_text=visitor_body)
-text_body = "".join(parts)
+    # 전체에서 제외시킬 내용을 찾아 삭제
+    filtered_lines = [line for line in lines if line not in A]
 
-print(text_body)
+    return filtered_lines
 
+# Example usage
+file_path = "공감.pdf"
+filtered_lines = process_pdf(file_path)
 
+#%%
 
 
 '''
