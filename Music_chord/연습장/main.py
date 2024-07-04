@@ -9,7 +9,7 @@ if __name__ == "__main__":
     file_path = os.path.join(folder_path, f"{title}.pdf")
     lines,key_name,title = text_setting(file_path)
     cleaned_lines = text_chords(lines)
-    text_separation,change_indices,Order_of_keys = line_filter(cleaned_lines)
+    text_separation,change_indices,Order_of_keys = line_filter(cleaned_lines,key_name)
     chords = Find_chords(text_separation)      # 코드 악보
     Roman_chords_list,original_chords_list = harmonics(Order_of_keys, chords) # 로마 악보
     export_to_csv(Roman_chords_list,original_chords_list,key_name,title)
@@ -25,10 +25,22 @@ if __name__ == "__main__":
     전조곡들은 어떻게 설정할지(어느정도 해결)
     전조가 있기전에 &나오고 #,b이 몇개가 붙는지 나온다(해결)
     
+    - 같은줄에 전조가 있는경우에 같은 라인에 있는 정보와 합쳐져서 키가 바뀜
+      같은줄에 합쳐질 경우에 뒤에와 전조와 합쳐질 경우 무시하고 다음 키로 지정(해결)
+      
+
     dual funtion은 어떻게 할것인가?
     * 근본적인 문제가 영어 가사의 등장,
     * 분석할때 다른키에서 중복된 key의 값이 같을때 전조했을때 그키의 분석으로해야되는데 전조 전에 키로 분석
     키가 다를 경우 키마다 패턴을 분석한뒤에 합치는게 더 낫지 않을까?
+    
+    
+    # 파일이 깨져서 읽히는 경우가 있음 파일문제인지 아니면 어떤 오류인지 다른 외부파일로
+      돌려도 문제가 똑같이 발생하므로 검토 요함
+
+    # 전조 되는 위치도 가르쳐줘야될듯하다 그러면 베이스를 참고하기 쉬울듯하다
+
+
 
 업데이트 한내용
 자동으로 key 찾아주기(수리중)

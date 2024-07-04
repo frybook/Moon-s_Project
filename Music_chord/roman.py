@@ -10,7 +10,7 @@ Chrods_name = {"Ⅰ" : ["C","F",  "Bb", "Eb", "Ab", "Db", "Gb","B", "E", "A", "D
                "ⅶ" : ["B","E",  "A",  "D",  "G",  "C",  "F", "A#","D#","G#","C#","F#"]}
 Frame = pd.DataFrame(Chrods_name,index = KEY)
 
-
+# "Ⅰ","ⅱ","ⅲ","Ⅳ","Ⅴ","ⅵ","ⅶ"
 # CSV파일로 저장하기
 Frame.to_csv("Major_scale.csv", index_label='KEY')
 

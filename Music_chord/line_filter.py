@@ -6,28 +6,40 @@ import re
 
 #%%
 # 조표가 바뀌는 분기점을 찾고 그 분기점으로 text를 나누는 함수
-def line_filter(cleaned_lines):
+def line_filter(cleaned_lines,key_name):
     Key_name = pd.read_csv("Key_signature.csv", index_col='KEY')
+    key_condition = []
+    for A in key_name:
+        if A in Key_name.index:
+            key_condition.append(Key_name.loc[A, "Key_signature"])
+
     pattern = '|'.join(re.escape(sig) for sig in Key_name["Key_signature"]) # 패턴만들어서 
-    pattern = pattern.replace(r'\&b', r'\&b+') 
-    
+    pattern = pattern.replace(r'\&b', r'\&b+')
+
     filtered = []
     for text_line in cleaned_lines:
         matches = re.findall(pattern,text_line)
         filtered.append(matches)              # 패턴의 맞는 텍스트만 남김
-        
+    # 걸러진 내용에서 다시한번 Key에 나온 내용만 추출
+    filtered_data = []
+    for item in filtered:
+        if item and item[0] in key_condition:
+            filtered_data.append(item)  
+        else:
+            filtered_data.append([])
+     
     # 키가 바뀔때마다 바뀌는 행을 구함
     change_indices = []
     last_value = None
-    for i, current_value in enumerate(filtered):
+    for i, current_value in enumerate(filtered_data):
         if current_value not in ([], last_value):
             change_indices.append(i)
             last_value = current_value
-    
+            
     Key_Trans = []
     for i in range(len(change_indices)):
         x = change_indices[i]
-        Trans = filtered[x]
+        Trans = filtered_data[x]
         Key_Trans.append(Trans)
 
     # &bb상태에서 다시 ?_key로 바꾸는 과정
@@ -46,6 +58,7 @@ def line_filter(cleaned_lines):
         start_idx = change_indices[i]
         end_idx = change_indices[i + 1]
         text_separation[i] = cleaned_lines[start_idx:end_idx] # i값에다가 key의 이름을 넣으면 될꺼같다.
+    
     
     return text_separation,change_indices,Order_of_keys
 

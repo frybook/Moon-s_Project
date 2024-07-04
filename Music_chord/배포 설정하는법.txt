@@ -1,4 +1,4 @@
-cd C:\Python\Syntex\working\Music_chord py.파일 위치 잡아주고
+cd C:\Python\Syntex\working\Music_chord Pdf_chord_GUI.py파일 위치 잡아주고
 
 pyinstaller Pdf_chord_GUI.py 실행한 후
 
