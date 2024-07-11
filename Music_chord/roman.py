@@ -72,6 +72,10 @@ def extract_base_note(note):
         return base_note[:2]
     return base_note[0]
 #%%
+
+
+
+#%%
 # 코드 타입을 추출하는 함수
 import re
 def extract_chord_type(note):    
@@ -97,39 +101,53 @@ def extract_chord_type(note):
 #%% # key에 따라 로마숫자로 변형
 def process_key(Order_of_keys, chords, Major_scale):
     roman_chords = []
-        
+
     for idx, key in enumerate(Order_of_keys):
-        chord_list = chords[idx]  
+        chord_list = chords[idx]
         romanized_chord_list = []
-    
+
         for chord_pair in chord_list:
             romanized_chord_pair = []
-    
+
             for note in chord_pair.split():
                 base_note = extract_base_note(note)
                 chord_type = extract_chord_type(note)
                 found = False
-    
+
+                # Convert base_note to Roman numeral
                 for col_name in Major_scale.columns:
                     scale_value = Major_scale.at[key, col_name]
-    
+
                     if scale_value == base_note:
                         roman_numeral = col_name
-                        inversion_info = note.split('/')[1] if '/' in note else ''
                         chord_notation = f"{roman_numeral}{chord_type}" if base_note != chord_type else roman_numeral
-                        if inversion_info:
-                            romanized_chord_pair.append(f"{chord_notation}/{inversion_info}")
-                        else:
-                            romanized_chord_pair.append(chord_notation)
-    
                         found = True
                         break
-    
+
                 if not found:
                     romanized_chord_pair.append(note)
-    
+                    continue
+
+                inversion_info = ''
+                if '/' in note:
+                    inversion_note = note.split('/')[1]
+                    inversion_found = False
+                    for col_name in Major_scale.columns:
+                        scale_value = Major_scale.at[key, col_name]
+                        if scale_value == inversion_note:
+                            inversion_info = col_name
+                            inversion_found = True
+                            break
+                    if not inversion_found:
+                        inversion_info = inversion_note
+
+                if inversion_info:
+                    romanized_chord_pair.append(f"{chord_notation}/{inversion_info}")
+                else:
+                    romanized_chord_pair.append(chord_notation)
+
             romanized_chord_list.append(' '.join(romanized_chord_pair))
-    
+
         roman_chords.append(romanized_chord_list)
     
     return roman_chords

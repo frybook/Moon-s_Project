@@ -23,14 +23,14 @@ def csv_text():
     return dataframes
 
 
-chord_frames = csv_text()
-print(chord_frames)
+Rm_chord_frames = csv_text()
+
 #%%
 
 index_position = 19    # 0번쨰 인덱스 찾으려고
-song_list = list(chord_frames.keys()) # 이름들을 인덱스로 찾을수있게 순서를 만들어줌
+song_list = list(Rm_chord_frames.keys()) # 이름들을 인덱스로 찾을수있게 순서를 만들어줌
 selected_key_by_index = song_list[index_position] # 0번의 인덱스에 해당하는 이름이 뭔지 찾음
-selected_df_by_index = chord_frames[selected_key_by_index] # 찾은이름을 토대로 안에 내용을 꺼냄
+selected_df_by_index = Rm_chord_frames[selected_key_by_index] # 찾은이름을 토대로 안에 내용을 꺼냄
 chords_by_index = selected_df_by_index['chord'].tolist() # 찾은 내용을 리스트로 만들어줌
 print(chords_by_index)
 #%%
@@ -115,6 +115,8 @@ print(repeated_segments)
 한번더 가공하는게 낫나? 아니면 지금 가공해서 출력하는게 낫나?
 전자일 경우에는 좀더 자세한 텐션까지를 알수있을때 도움이될꺼같고
 후자일 경우 진행만을 목적으로 확인하기에는 도움이 될꺼같다.
+
+생각해보닌까 패턴 찾는데 변형된걸 찾는거보다 원래 코드에서 찾는게 낫지 않을까?
 
 패턴의 정형화
 - 같은 코드가 나올경우 무시
