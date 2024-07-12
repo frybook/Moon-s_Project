@@ -10,62 +10,31 @@ Chrods_name = {"Ⅰ" : ["C","F",  "Bb", "Eb", "Ab", "Db", "Gb","B", "E", "A", "D
                "ⅶ" : ["B","E",  "A",  "D",  "G",  "C",  "F", "A#","D#","G#","C#","F#"]}
 Frame = pd.DataFrame(Chrods_name,index = KEY)
 
-# "Ⅰ","ⅱ","ⅲ","Ⅳ","Ⅴ","ⅵ","ⅶ"
-# CSV파일로 저장하기
-Frame.to_csv("Major_scale.csv", index_label='KEY')
-
-# CSV파일 읽기
-Major_scale = pd.read_csv("Major_scale.csv", index_col='KEY')
-#%%
-import pandas as pd
-KEY = ['Am_Key','Dm_Key','Gm_Key','Cm_Key','Fm_Key','Bbm_Key','Ebm_Key','G#m_Key','C#m_Key','F#m_Key','Bm_Key','Em_Key']
-Chrods_name = {"ⅰ" : ["A","D",  "G",  "C",   "F",  "Bb", "Eb", "G#", "C#", "F#", "Bm", "E"],
-               "ⅱ" : ["B","E",  "A",  "D",   "G",  "C",  "F",  "A#", "D#", "G#", "C#", "F#"],
-               "Ⅲ" : ["C","F",  "Bb", "Eb",  "Ab", "Db", "Gb", "B",  "E",  "A",  "D",  "G"],
-               "ⅳ" : ["D","G",  "C",  "F",   "Bb", "Eb", "Ab", "C#", "F#", "B",  "E",  "A"],
-               "Ⅴ" : ["E","A",  "D",  "G",   "C",  "F",  "Bb", "D#", "G#", "C#" ,"F#", "B"],
-               "Ⅵ" : ["F","Bb", "Eb", "Ab",  "Db", "Gb", "B",  "E",  "A",  "D",  "G",  "C"],
-               "Ⅶ" : ["G","C",  "F",  "Bb",  "Eb", "Ab", "Db", "F#", "B",  "E",  "A",  "D"]}
-Frame2 = pd.DataFrame(Chrods_name,index = KEY)
-
-Frame2.to_csv("minor_scale.csv", index_label='KEY')
-minor_scale = pd.read_csv("minor_scale.csv", index_col='KEY')
+Frame.columns
+A = Frame.loc['Gb_Key']
 
 #%%
-# 플랫,샵으로 Key 찾기
-KEY = ['C_Key','F_Key','Bb_Key','Eb_Key','Ab_Key','Db_Key','Gb_Key','B_Key','E_Key','A_Key','D_Key','G_Key']
-signature = ['&c','&b','&bb','&bbb','&bbbb','&bbbbb','&bbbbbb','&#####','&####','&###','&##','&#']
-value_name = 'Key_signature'
-Key_name = pd.DataFrame(index=KEY, columns=[value_name], data=signature)
-Key_name.to_csv("Key_signature.csv", index_label='KEY')
-Key_name = pd.read_csv("Key_signature.csv", index_col='KEY')
-#%% csv 파일 만들기
-import csv
-def export_to_csv(Roman_chords_list, original_chords_list,All_chords_list, key_name, title, export_path):
-    csv_file_rm = f"{export_path}_Rm({key_name}).csv"
-    csv_file_og = f"{export_path}_Og({key_name}).csv"
-    csv_file_All_rm = f"{export_path}_All_Rm({key_name}).csv"
-
-    with open(csv_file_rm, mode='w', newline='', encoding='utf-8') as file_rm:
-        writer_rm = csv.writer(file_rm)
-        for item in Roman_chords_list:
-            writer_rm.writerow([item])
-
-    with open(csv_file_og, mode='w', newline='', encoding='utf-8') as file_og:
-        writer_og = csv.writer(file_og)
-        for item in original_chords_list:
-            writer_og.writerow([item])
-            
-    with open(csv_file_All_rm, mode='w', newline='', encoding='utf-8') as file_All_rm:
-        writer_og = csv.writer(file_All_rm)
-        for item in All_chords_list:
-            writer_og.writerow([item])
+c = ["D","Db","F","C","F#"]
+for idx, key in enumerate(A):
+    for f in c:
+        if key[0] == f:
+            print(f)
 
 
-
-
-
-#%% 
+#%%
+from pdf_chord_extraction_functionalization import text_setting, text_chords, Find_chords
+from line_filter import line_filter
+import os
+#%% 곡분석
+if __name__ == "__main__":
+    folder_path = "C:/Python/Syntex/working/개인/악보" # 악보 폴더 위치
+    title = input("곡 제목을 말해주세요 :")
+    file_path = os.path.join(folder_path, f"{title}.pdf")
+    lines,key_name,title = text_setting(file_path)
+    cleaned_lines = text_chords(lines)
+    text_separation,change_indices,Order_of_keys = line_filter(cleaned_lines,key_name)
+    chords = Find_chords(text_separation) 
+#%%
 import pandas as pd
 # 기본음을 추출하는 함수 베이스음 
 def extract_base_note(note):
@@ -99,9 +68,10 @@ def extract_chord_type(note):
     
     
     return note
-
-
-#%% # key에 따라 로마숫자로 변형
+            
+Major_scale = pd.read_csv("Major_scale.csv", index_col='KEY') 
+All_Major_scale = pd.read_csv("All_Major_scale.csv", index_col='KEY')       
+#%%
 def process_key(Order_of_keys, chords, Major_scale):
     roman_chords = []
     for idx, key in enumerate(Order_of_keys):
@@ -151,13 +121,11 @@ def process_key(Order_of_keys, chords, Major_scale):
         roman_chords.append(romanized_chord_list)
 
     return roman_chords
+
+"""위치는 찾았고 이제 그 위치를 로마로 변환할수있는 알고리즘이 필요"""
+
 #%%
 
-
-
-
-
-#%% 메인코드
 def harmonics(Order_of_keys, chords):
     Major_scale = pd.read_csv("Major_scale.csv", index_col='KEY')
     All_Major_scale = pd.read_csv("All_Major_scale.csv", index_col='KEY')
@@ -169,3 +137,5 @@ def harmonics(Order_of_keys, chords):
     for key in chords:
         original_chords_list.extend(chords[key])
     return chords_list,original_chords_list,All_chords_list
+
+Roman_chords_list,original_chords_list,All_chords_list = harmonics(Order_of_keys, chords)
