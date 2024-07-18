@@ -169,3 +169,10 @@ def harmonics(Order_of_keys, chords):
     for key in chords:
         original_chords_list.extend(chords[key])
     return chords_list,original_chords_list,All_chords_list
+
+#%%
+def harmonics2(Order_of_keys, chords):    
+    All_Major_scale = pd.read_csv("All_Major_scale.csv", index_col='KEY')
+    All_Roman_symbols =  process_key(Order_of_keys, chords, All_Major_scale)
+    All_chords_list = [item for sublist in All_Roman_symbols for item in sublist]
+    return All_chords_list

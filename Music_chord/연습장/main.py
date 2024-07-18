@@ -12,7 +12,7 @@ if __name__ == "__main__":
     text_separation,change_indices,Order_of_keys = line_filter(cleaned_lines,key_name)
     chords = Find_chords(text_separation)      # 코드 악보
     Roman_chords_list,original_chords_list,All_chords_list = harmonics(Order_of_keys, chords) # 로마 악보
-    export_to_csv(Roman_chords_list,original_chords_list,key_name,title)
+    # export_to_csv(Roman_chords_list,original_chords_list,key_name,title)
     
 #%%
 """
