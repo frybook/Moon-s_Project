@@ -1,14 +1,19 @@
 import os
 import pandas as pd
 import re
-
+# _Og
 # Rm이 들어간 csv 파일 전체를 불러오기(중간에 정보를 못찾으면 오류가 나옴)
-def csv_text():
-    # 폴더 경로 설정
-    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+#%%
+def load_csv_data(folder_path, file_filter):
+    """
+    폴더 내에서 특정 필터가 포함된 .csv 파일을 읽어와 데이터프레임의 사전을 반환합니다.
     
-    # 폴더 내의 "Rm"이 들어간 모든 .csv 파일 이름 가져오기
-    file_names = [f for f in os.listdir(folder_path) if f.endswith('.csv') and 'All_Rm' in f]
+    :param folder_path: 폴더 경로
+    :param file_filter: 필터 문자열 (파일 이름에 포함된 경우 필터링)
+    :return: 데이터프레임을 담고 있는 사전
+    """
+    # 폴더 내의 파일 이름 가져오기
+    file_names = [f for f in os.listdir(folder_path) if f.endswith('.csv') and file_filter in f]
     
     # 사전 형태로 데이터프레임 저장
     dataframes = {}
@@ -21,15 +26,19 @@ def csv_text():
         df.columns = ['chord'] * len(df.columns)
         dataframes[variable_name] = df
     
-    
     return dataframes
+#%%
+def csv_text():
+    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+    return load_csv_data(folder_path, 'All_Rm')
 
-Rm_chord_frames = csv_text()
-song_list = list(Rm_chord_frames.keys())
+def csv_text2():
+    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+    return load_csv_data(folder_path, '_Og')
 
 #%%
-
-def select_songs(Rm_chord_frames,song_list):    
+#  main 파일 실행 시키려고
+def select_songs(Rm_chord_frames,song_list,Og_chord_frames,song_list2):    
     num = int(input("곡의 번호를 선택해주세요 : "))
     index_position = num # 0번쨰 인덱스 찾으려고
     song_list = list(Rm_chord_frames.keys()) # 이름들을 인덱스로 찾을수있게 순서를 만들어줌
@@ -41,7 +50,22 @@ def select_songs(Rm_chord_frames,song_list):
     for chord in chords_by_index:
         new_chords = chord.split()
         new_chord_list.extend(new_chords)
-    return new_chord_list
+        
+    song_list = list(Og_chord_frames.keys()) # 이름들을 인덱스로 찾을수있게 순서를 만들어줌
+    selected_key_by_index2 = song_list2[index_position] # 0번의 인덱스에 해당하는 이름이 뭔지 찾음
+    selected_df_by_index2 = Og_chord_frames[selected_key_by_index2] # 찾은이름을 토대로 안에 내용을 꺼냄
+    chords_by_index2 = selected_df_by_index2['chord'].tolist() # 찾은 내용을 리스트로 만들어줌
+    
+    new_chord_list2 = []
+    for chord in chords_by_index2:
+        new_chords = chord.split()
+        new_chord_list2.extend(new_chords)    
+        
+    
+    return new_chord_list,new_chord_list2
+
+
+
 #%%
 
 def select_song(Rm_chord_frames, index_position):
@@ -91,18 +115,18 @@ def extract_roman_numerals(chords):
     return trans7
 
 # 최소 필요 정보
-new_chord_list = ['ⅠM7', 'ⅵsus4', 'ⅱm7','Ⅴ9','Ⅴ', 'Ⅴsus4', 'ⅲm7', 'ⅵ7', 'ⅱm7', 'ⅱ']
-# 여기서 Ⅴ일 경우 7를 붙이도록 변경
+# new_chord_list = ['ⅠM7', 'ⅵsus4', 'ⅱm7','Ⅴ9','Ⅴ', 'Ⅴsus4', 'ⅲm7', 'ⅵ7', 'ⅱm7', 'ⅱ']
+# # 여기서 Ⅴ일 경우 7를 붙이도록 변경
 
-roman_numerals = extract_roman_numerals(new_chord_list)
-trans7 = []
-for five in roman_numerals:
-    if five == "Ⅴ":
-        trans7.append(f"{five}7")
-    else:
-        trans7.append(five)
+# roman_numerals = extract_roman_numerals(new_chord_list)
+# trans7 = []
+# for five in roman_numerals:
+#     if five == "Ⅴ":
+#         trans7.append(f"{five}7")
+#     else:
+#         trans7.append(five)
 
-print(roman_numerals)
+# print(roman_numerals)
 
 
 

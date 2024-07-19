@@ -58,7 +58,8 @@ def text_setting(file_path):
         if part in Frame_values:
             key_name = Key_name.loc[Frame_values == part].index[0]
             parts_with_keys.append(key_name)
-
+    if not parts_with_keys:
+        parts_with_keys = ["C_Key"]
     return filtered_lines,parts_with_keys,title
 '''PDF를 텍스트로 변형하고 key 파악하기'''
 
@@ -66,7 +67,7 @@ def text_setting(file_path):
 # 제거할 텍스트 영어를 제거해줘야된다.
 def text_chords(lines):
     cleaned_lines = []
-    eraser = ["Feat","CODE","JTBC","Fools",'DOKO',"YOUNHA","UNSTABLE MINDSET","œœb","#9b13"]
+    eraser = ["Feat","CODE","JTBC","Fools",'DOKO',"YOUNHA","UNSTABLE MINDSET","œœb","#9b13","F.O."]
     # print("대문자1 소문자 2개가 붙어있는 단어,문장을 제외해주세요")
     print("------------------------------------------------------")
     # exclude = input("제외할 문장을 말해주세요 : ")

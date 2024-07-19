@@ -72,7 +72,7 @@ def target_song(tokenized_progressions, tokenized_roman):
 
     for target_seq in target_seqs:
         best_match, best_ratio = find_best_match_custom(target_seq, large_seq, order_weight)
-        if best_ratio <= 8:
+        if best_ratio >= 8:
             
             results.append((target_seq, best_match, best_ratio))
             # print(f'코드 패턴: {target_seq}')

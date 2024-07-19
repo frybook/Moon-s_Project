@@ -49,7 +49,8 @@ def line_filter(cleaned_lines,key_name):
         if information in Frame_values:
             key_name = Key_name.loc[Frame_values == information].index[0]
             Order_of_keys.append(key_name) 
-            
+    if not Order_of_keys:
+        Order_of_keys.append("C_Key")
     # 끝을 설정해주고
     text_separation = {}
     change_indices.append(len(cleaned_lines))
@@ -58,7 +59,9 @@ def line_filter(cleaned_lines,key_name):
         start_idx = change_indices[i]
         end_idx = change_indices[i + 1]
         text_separation[i] = cleaned_lines[start_idx:end_idx] # i값에다가 key의 이름을 넣으면 될꺼같다.
-    
+    if not text_separation:
+        text_separation[0] = cleaned_lines
+
     
     return text_separation,change_indices,Order_of_keys
 

@@ -1,4 +1,4 @@
-from Import_csv import csv_text,extract_roman_numerals,select_songs
+from Import_csv import csv_text,csv_text2,extract_roman_numerals,select_songs
 from chord_progressions import token,target_song,convert_data
 import pandas as pd
 # from Import_csv import *
@@ -10,8 +10,10 @@ import pandas as pd
 
 if __name__ == "__main__":
     Rm_chord_frames = csv_text()
+    Og_chord_frames = csv_text2()
     song_list = list(Rm_chord_frames.keys())
-    select_song_chords = select_songs(Rm_chord_frames,song_list)
+    song_list2 = list(Og_chord_frames.keys())
+    select_song_chords,select_song_chords2 = select_songs(Rm_chord_frames,song_list,Og_chord_frames,song_list2)
     roman_numerals = extract_roman_numerals(select_song_chords)
     tokenized_progressions,tokenized_roman = token(roman_numerals)
     token_pattern = target_song(tokenized_progressions,tokenized_roman)
