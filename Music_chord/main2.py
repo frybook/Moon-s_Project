@@ -9,8 +9,9 @@ import pandas as pd
 #%%
 
 if __name__ == "__main__":
-    Rm_chord_frames = csv_text()
-    Og_chord_frames = csv_text2()
+    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+    Rm_chord_frames = csv_text(folder_path)
+    Og_chord_frames = csv_text2(folder_path)
     song_list = list(Rm_chord_frames.keys())
     song_list2 = list(Og_chord_frames.keys())
     select_song_chords,select_song_chords2 = select_songs(Rm_chord_frames,song_list,Og_chord_frames,song_list2)

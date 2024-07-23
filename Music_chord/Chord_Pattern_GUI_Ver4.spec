@@ -1,7 +1,6 @@
 import sys 
 sys.setrecursionlimit(sys.getrecursionlimit() * 5)
 
-
 a = Analysis(
     ['Chord_Pattern_GUI_Ver4.py'],
     pathex=[],
@@ -27,7 +26,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,  # 콘솔 창을 숨기려면 False로 변경하세요.
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,

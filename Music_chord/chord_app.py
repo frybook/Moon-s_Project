@@ -66,8 +66,8 @@ class ChordApp:
         folder_path = filedialog.askdirectory()
         if folder_path:
             # 실제 데이터 로드
-            self.rm_chord_frames = csv_text()  # 이 함수에서 데이터를 로드하도록 수정
-            self.Og_chord_frames = csv_text2()  # 이 함수에서 데이터를 로드하도록 수정
+            self.rm_chord_frames = csv_text(folder_path)  # 이 함수에서 데이터를 로드하도록 수정
+            self.Og_chord_frames = csv_text2(folder_path)  # 이 함수에서 데이터를 로드하도록 수정
             self.song_list = list(self.rm_chord_frames.keys())
             self.update_song_listbox()
 

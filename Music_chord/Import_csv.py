@@ -28,12 +28,12 @@ def load_csv_data(folder_path, file_filter):
     
     return dataframes
 #%%
-def csv_text():
-    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+def csv_text(folder_path):
+    # folder_path = "C:\Python\Syntex\working\개인\악보\분석"
     return load_csv_data(folder_path, 'All_Rm')
 
-def csv_text2():
-    folder_path = "C:\Python\Syntex\working\개인\악보\분석"
+def csv_text2(folder_path):
+    # folder_path = "C:\Python\Syntex\working\개인\악보\분석"
     return load_csv_data(folder_path, '_Og')
 
 #%%
