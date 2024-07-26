@@ -1,0 +1,1 @@
+jupyter notebook notebook-dir="C:\Python\Syntex\따로 공부\출산율"

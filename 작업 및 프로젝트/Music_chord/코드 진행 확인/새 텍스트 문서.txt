@@ -1,0 +1,15 @@
+결국 너야
+
+C to Am (I to vi in C Major)
+
+I - vi 진행으로, 메이저 키에서 흔히 사용되는 진행입니다. I (C Major)에서 vi (A Minor)로 이동하면서 주요 음계 내에서 부드러운 변화를 줍니다.
+Am to F#m7(b5) (vi in C Major to iiø7 in E Minor)
+
+여기서 vi (Am) 코드가 나온 후 F#m7(b5) 코드로 이동합니다. F#m7(b5)는 E Minor의 iiø7 코드로, 이를 통해 잠시 E Minor으로 전조된 것으로 해석할 수 있습니다.
+F#m7(b5) to Fm (iiø7 in E Minor to bVI in C Minor)
+
+F#m7(b5)에서 F Minor (Fm)로의 이동은 상당히 드물고 독특합니다. Fm은 C Major의 평행조인 C Minor의 bVI 코드로, 이는 한 키 내에서의 갑작스러운 변화로 독특한 분위기를 줍니다.
+종합 분석
+이 진행은 주로 C Major에서 시작하여 잠시 E Minor로 전조되었다가, C Minor의 색채를 더한 복잡하고 감정적인 코드 진행입니다.
+
+이러한 진행은 다양한 음악적 감정을 표현할 수 있습니다. 특히 마지막 Fm 코드는 곡의 분위기를 더욱 드라마틱하고 애절하게 만들 수 있습니다.
